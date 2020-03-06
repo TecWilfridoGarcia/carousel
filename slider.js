@@ -224,7 +224,7 @@
  
        if (Math.abs(_.moveX - _.startX) === 0) return;
  
-       _.stayAtCur = Math.abs(_.moveX - _.startX) < 40 || typeof _.moveX === "undefined" ? true : false;
+       _.stayAtCur = Math.abs(_.moveX - _.startX) < 30 || typeof _.moveX === "undefined" ? true : false;
        _.dir = _.startX < _.moveX ? 'left' : 'right';
  
        if (_.stayAtCur) {} else {
