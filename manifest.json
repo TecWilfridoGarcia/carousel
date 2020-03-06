@@ -3,7 +3,7 @@
     "short_name": "Slider",
     "theme_color": "#dd141d",
     "background_color": "#dd141d",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "scope": "https://tecwilfridogarcia.github.io/carousel/",
     "start_url": "https://tecwilfridogarcia.github.io/carousel/",
