@@ -1,0 +1,27 @@
+{
+    "name": "Slider",
+    "short_name": "Slider",
+    "theme_color": "#dd141d",
+    "background_color": "#dd141d",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "https://tecwilfridogarcia.github.io/carousel/",
+    "start_url": "https://tecwilfridogarcia.github.io/carousel/",
+    "icons": [{
+        "src": "/image/icon.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }, {
+        "src": "/image/icon.png",
+        "type": "image/png",
+        "sizes": "152x152"
+      }, {
+        "src": "/image/icon.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      }, {
+        "src": "/image/icon.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }]    
+  }

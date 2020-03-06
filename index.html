@@ -13,12 +13,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    height: 100px;
+    height: 74px;
     width: 100%;
   }
-
-
-
 
   .carousel {
     position: relative;
@@ -36,13 +33,26 @@
     height: 100%;
   }
 
+.carousel-content::before {
+  content: "";
+    filter: blur(5px);
+    position: absolute;
+    color: black;
+    z-index: 28;
+    width: 26px;
+    right: -9px;
+    background: white;
+    top: -10px;
+    height: 112px;
+    opacity: .7;
+}
   .slide {
     height: 100%;
     position: absolute;
     z-index: 1;
     transition: left .4s cubic-bezier(.47, .13, .15, .89);
-    width: 87px !important;
-    height: 87px !important;
+    width: 74px !important;
+    height: 74px !important;
     border-radius: 12px;
   }
 
@@ -113,7 +123,7 @@
     width: 100%;
     height: 46px;
     color: white;
-    background-color: red;
+    background-color: #dd141d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,7 +218,7 @@
     window.addEventListener('resize', setScreenSize);
 
     function setScreenSize() {
-      if (window.innerWidth >= 350) {
+      if (window.innerWidth >= 200) {
         carouselDisplaying = 3.5;
       } else if (window.innerWidth >= 300) {
         carouselDisplaying = 2;
@@ -217,9 +227,7 @@
       }
       getScreenSize();
       console.log('setScreenSize');
-
     }
-
     function getScreenSize() {
       var slides = document.querySelectorAll('.slide');
       var slidesArray = Array.prototype.slice.call(slides);
@@ -231,7 +239,6 @@
         initialWidth += lengthOfSlide;
       });
     }
-
 
     var rightNav = document.querySelector('.nav-right');
     rightNav.addEventListener('click', moveLeft);
