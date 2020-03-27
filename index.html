@@ -4,33 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./styles.css">
+  <title>To move object</title>
 </head>
 
-<body>
-  <div class="slider">
-    <div class="slide" style="background-color: red;"><span>TEXT</span></div>
-    <div class="slide" style="background-color: blue;"><span>TEXT</span></div>
-    <div class="slide" style="background-color: yellow;"><span>TEXT</span></div>
-    <div class="slide" style="background-color: green;"><span>TEXT</span></div>
-    <div class="slide" style="background-color: black;"><span>TEXT</span></div>
-  </div>
-  <a class="arrow-left left" href="javascript:void(0);"><</a>
-  <a class="arrow-right right" href="javascript:void(0);">></a>
-  <div class="dots-wrapper"></div>
+<body style="margin: 0;">
+  <canvas width="375" height="300" id="lienzo"></canvas>
+  <script>
+    var cv, cx, objetos, objetoActual = null;
+    var startX = 0, startY = 0;
 
-  <label class="img-upload-label">
-    Upload Image:
-    <input type="file" class="js-fileinput img-upload" accept="image/jpeg,image/png,image/gif">
-</label>
-<button class="js-export img-export">Export</button>
-<canvas class="js-editorcanvas"></canvas>
-<canvas class="js-previewcanvas" width="375px"></canvas>
-
-
-  <script src="./main.js"></script>
-  <script src="./crop.js"></script>
-</body>
-
+    function actualizar(){
+      cx.fillStyle = '#f0f0f0';
+      cx.fillRect(0, 0, 400, 300)
+      for(var i = 0; i < objetos.length; i++){
+        cx.fillStyle = objetos[i].color; //pijntar el cuadro
+        cx.fillRect(objetos[i].x, objetos[i].y, objetos[i].width, objetos[i].height);
+      }
+    }
+    window.onload = function () {
+      objetos = []
+      cv = document.getElementById('lienzo');
+      cx = cv.getContext('2d');
+      //agregar obejtos prueba
+      objetos.push({
+        x:0, y:0, 
+        width: 100, height: 200,
+        color:'#00f'
+      })
+        objetos.push({
+        x:300, y:150, 
+        width: 50, height: 100,
+        color:'#f00'
+      });
+      actualizar();
+      //evento mouse
+      cv.onmousedown = function(event) {
+        console.log('si');
+        for(var i = 0; i < objetos.length; i++) {
+          if(objetos[i].x < event.clientX 
+            && (objetos[i].width + objetos[i].x > event.clientX)
+            && objetos[i].y < event.clientY
+            && (objetos[i].height + objetos[i].y > event.clientY)
+            ) { 
+              objetoActual = objetos[i];
+              startY = event.clientY - objetos[i].y;
+              startX = event.clientX - objetos[i].x;
+              break;
+          }
+        }
+      }
+      cv.onmousemove = function(event) {
+        if(objetoActual != null) {
+          objetoActual.x = event.clientX - startX;
+          objetoActual.y = event.clientY - startY;
+        }
+        actualizar();
+      }
+      cv.onmouseup = function(event) {
+        objetoActual = null;
+      }
+    }
+  </script>
 </html>
