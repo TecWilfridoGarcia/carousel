@@ -1,68 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To move object</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
-<body style="margin: 0;">
-  <canvas width="375" height="300" id="lienzo"></canvas>
-  <script>
-    var cv, cx, objetos, objetoActual = null;
-    var startX = 0, startY = 0;
-
-    function actualizar(){
-      cx.fillStyle = '#f0f0f0';
-      cx.fillRect(0, 0, 400, 300)
-      for(var i = 0; i < objetos.length; i++){
-        cx.fillStyle = objetos[i].color; //pijntar el cuadro
-        cx.fillRect(objetos[i].x, objetos[i].y, objetos[i].width, objetos[i].height);
-      }
-    }
-    window.onload = function () {
-      objetos = []
-      cv = document.getElementById('lienzo');
-      cx = cv.getContext('2d');
-      //agregar obejtos prueba
-      objetos.push({
-        x:0, y:0, 
-        width: 100, height: 200,
-        color:'#00f'
-      })
-        objetos.push({
-        x:300, y:150, 
-        width: 50, height: 100,
-        color:'#f00'
-      });
-      actualizar();
-      //evento mouse
-      cv.onmousedown = function(event) {
-        console.log('si');
-        for(var i = 0; i < objetos.length; i++) {
-          if(objetos[i].x < event.clientX 
-            && (objetos[i].width + objetos[i].x > event.clientX)
-            && objetos[i].y < event.clientY
-            && (objetos[i].height + objetos[i].y > event.clientY)
-            ) { 
-              objetoActual = objetos[i];
-              startY = event.clientY - objetos[i].y;
-              startX = event.clientX - objetos[i].x;
-              break;
-          }
-        }
-      }
-      cv.onmousemove = function(event) {
-        if(objetoActual != null) {
-          objetoActual.x = event.clientX - startX;
-          objetoActual.y = event.clientY - startY;
-        }
-        actualizar();
-      }
-      cv.onmouseup = function(event) {
-        objetoActual = null;
-      }
-    }
-  </script>
+<body>
+  <div id="app">
+  <h1>Lista de deberes</h1>
+ <input class="form-control" placeholder="New item" v-model="newTodo" @keydown.enter="addTodo">  <ul>
+    <li v-for="todo in todos" :key="todo.id" class="flex">
+      <label>
+        <input type="checkbox" class="nes-checkbox" v-model="todo.done">
+        <span>&nbsp</span>
+      </label>
+      <del v-if="todo.done">{{ todo.text }}</del>
+      <span v-else>{{ todo.text }}</span>
+      <div class="space"></div>
+      <button class="nes-btn is-error padding" v-on:click="removeTodo(todo.id)">X</button>
+    </li>
+  </ul>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./main.js"></script>
+</body>
 </html>
