@@ -6,13 +6,15 @@ new Vue({
   },
   methods: {
     addTodo() {
-      this.todos.push({ text: this.newTodo, completed: false });
-      this.newTodo = '';
+      if (this.newTodo !== "") {
+        this.todos.push({ text: this.newTodo, completed: false });
+        this.newTodo = '';
+      } else {
+        return false;
+      }
     },
-      removeTodo(id) {
-     // this.todos = this.todos.filter(todo => todo.id !== id)
-      //localStorage.removeItem('todos', JSON.stringify(this.todo));
-      alert('aun no tiene esta funcionalidad')
+    removeTodo(id) {
+      this.todos.splice(id, 1);
     }
   },
   mounted() {
